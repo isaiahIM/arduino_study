@@ -1,0 +1,20 @@
+      if(timeCount>=4)
+      {
+        bitCount++;
+      }
+      
+      SPI_WriteBit(CLK, MOSI, write_data&(0x80>>bitCount), timeCount);
+      
+      if(bitCount>=8)
+      {
+        spi_wiriteTask=SPI_ENABLE_W;
+        bitCount=0;
+        firstLoop=1;
+
+        SPI_Disable(CS);
+
+        writeState=0;
+        readState=1;
+        SPI_Disable(CS);
+        
+      }
